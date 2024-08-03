@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
+import axios from 'axios';
 
 const Login = () => {
 
@@ -12,11 +13,23 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name, email, password)
+        // console.log(name, email, password)
+
         signIn(email, password)
             .then(result => {
-                const user = result.user;
-                console.log(user);
+                const loggedInUser = result.user;
+                console.log(loggedInUser);
+                // **jwt token**, 
+                // valid user hole jwt token pathabo. so login e kaj ta korte hobe
+                // fetch diye kora zay but ekhane axios use korlam
+
+                // get access token.
+                const user = {email}; // user er email ta nilam
+                axios.post('http://localhost:5000/jwt', user)
+                .then(res=> {
+                    console.log(res.data)
+                })
+
             })
             .catch(error => console.log(error));
     }
