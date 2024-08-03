@@ -23,11 +23,12 @@ const Login = () => {
                 // valid user hole jwt token pathabo. so login e kaj ta korte hobe
                 // fetch diye kora zay but ekhane axios use korlam
 
-                // get access token.
+                // get access token. cokies e token ta anlam
                 const user = {email}; // user er email ta nilam
-                axios.post('http://localhost:5000/jwt', user)
+                axios.post('http://localhost:5000/jwt', user, {withCredentials: true}) // client sider cookie k browser e set korbe
                 .then(res=> {
                     console.log(res.data)
+                    // if(res.data.success){ navigate(location?.state? location.state : '/')}
                 })
 
             })
